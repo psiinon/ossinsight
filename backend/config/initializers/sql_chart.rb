@@ -47,6 +47,16 @@ class SqlChart
     MDTable.convert([headers] + to_array)
   end
 
+  def to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << headers
+
+      to_array.each do |col|
+        csv << col
+      end
+    end
+  end
+
   def to_md_with_bar
     new_headers = headers.dup 
     new_headers.insert 1, 'bar'
